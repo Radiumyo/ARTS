@@ -3,38 +3,57 @@
 ## Algorithm
 
 ```Python
-# 206. Reverse Linked List
+# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+# for if 执行
+
 class Solution:
-    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        cur =  head
-        pre = None
-        while cur:
-            tmp = cur.next
+    def reverse(self, a, b):
+        pre, cur, nxt = None, a, a
+        while cur != b:
+            nxt = cur.next
             cur.next = pre
             pre = cur
-            cur = tmp
+            cur = nxt
+        return pre
+    
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head:
+            return head
+        a, b = head, head
+        for i in range(k):
+            if not b:
+                return head
+            b = b.next
+
+        newhead = self.reverse(a,b)
+        a.next = self.reverseKGroup(b,k)
+        return newhead
+
         return pre
 ```
 
 
 
 ## Review
-
+```
 Coordinate Frames
--link https://w3.cs.jmu.edu/spragunr/CS354_F22/readings/frames.pdf
+https://w3.cs.jmu.edu/spragunr/CS354_F22/readings/frames.pdf
+```
+-主要介绍了三种坐标系：世界坐标系、相机坐标系、图像坐标系
 
 
 ## Technique/Tips
 
-### 分享一个十分好用的划词软件——沙拉查词
+### 分享一个找数据集的网站-超神经
 
 
 ```
-https://saladict.crimx.com/
+https://hyper.ai/datasets
 ```
 
 
